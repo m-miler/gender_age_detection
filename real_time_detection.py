@@ -53,11 +53,11 @@ class gad_app(tk.Frame):
         self.camera_frame.pack(fill='both', padx=10, pady=10)
         
         
-        snapshot = tk.Button(self.camera_window, text='Take a snapshot', width=50)
+        snapshot = tk.Button(self.camera_window, text='Take a snapshot', width=50, font=['Times', '8', 'bold'])
         snapshot.pack(fill='both', padx=10, pady=5, anchor='n')
         snapshot.bind('<Button>', lambda x: self.take_snapshot())
 
-        back = tk.Button(self.camera_window, text='Back', width=50)
+        back = tk.Button(self.camera_window, text='Back', width=50, font=['Times', '8', 'bold'])
         back.pack(fill='both', padx=10, pady=5, anchor='n')
         back.bind('<Button>', lambda x: self.main_window(self.camera_window))
 
@@ -76,11 +76,11 @@ class gad_app(tk.Frame):
         self.image_frame = tk.Canvas(self.image_window, bd=2, relief="groove", width=self.width, height=self.height)
         self.image_frame.pack(fill='both', padx=10, pady=10)
         
-        load_image = tk.Button(self.image_window, text='Load image for detection', width=50)  
+        load_image = tk.Button(self.image_window, text='Load image for detection', width=50, font=['Times', '8', 'bold'])  
         load_image.pack(fill='both', padx=10, pady=5, anchor='n')
         load_image.bind('<Button>', lambda x: self.browse_img_file())
         
-        back = tk.Button(self.image_window, text='Back', width=50)
+        back = tk.Button(self.image_window, text='Back', width=50, font=['Times', '8', 'bold'])
         back.pack(fill='both', padx=10, pady=5, anchor='n')
         back.bind('<Button>', lambda x: self.main_window(self.image_window))
 
