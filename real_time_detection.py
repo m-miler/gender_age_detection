@@ -94,16 +94,15 @@ class gad_app(tk.Frame):
     def draw_found_faces(self, detected, image, color: tuple):
         gen_encoder = {0: 'Female', 1: 'Male'}
         age_encoder = {0: '0-2', 1: '4-6', 2: '8-13', 3: '15-20', 4: '25-32', 5: '38-43', 6: '48-53', 7: '60+'}
-                
-        img_to_pred = np.array(cv2.resize(image, (224, 224))).reshape(1, 224, 224, 3)
         
-        gender_pred = self.gender_model.predict(img_to_pred).argmax(1)[0]
-        age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
-        gender = gen_encoder[gender_pred]
-        age = age_encoder[age_pred]
-        prediction = f'Gender: {gender} Age: {age}'
-
         for (x, y, width, height) in detected:
+            img_to_pred = np.array(cv2.resize(image, (224, 224))).reshape(1, 224, 224, 3)
+            gender_pred = self.gender_model.predict(img_to_pred).argmax(1)[0]
+            age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
+            gender = gen_encoder[gender_pred]
+            age = age_encoder[age_pred]
+            prediction = f'Gender: {gender} Age: {age}'
+
             cv2.rectangle(image, (x, y), (x + width, y + height), color, thickness=3)
             cv2.putText(image, prediction,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
 
@@ -122,11 +121,11 @@ class gad_app(tk.Frame):
         self.camera_frame.create_image(0, 0, image = self.photo, anchor = tk.NW)
         self.camera_frame.after(10, lambda: self.start_camera())
 
-    def take_snapshot(self):
-        ts = datetime.datetime.now()
-        filename = "{}.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
-        p = os.path.sep.join((self.outputPath, filename))
-        cv2.imwrite(p, self.camera_frame.copy())
+    # def take_snapshot(self):
+    #     ts = datetime.datetime.now()
+    #     filename = "{}.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
+    #     p = os.path.sep.join((self.outputPath, filename))
+    #     cv2.imwrite(p, self.camera_frame.copy())
 
     def browse_img_file(self):
         filename = filedialog.askopenfilename(initialdir = "/", title = "Select an image", filetypes = (("JPG files", "*.JPG*"), ("all files", "*.*")))
