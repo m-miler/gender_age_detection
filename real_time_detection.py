@@ -58,10 +58,6 @@ class gad_app(tk.Frame):
         self.camera_frame = tk.Canvas(self.camera_window, bd=2, relief="groove", width=self.width, height=self.height)
         self.camera_frame.pack(fill='both', padx=10, pady=10)
         
-        # snapshot = tk.Button(self.camera_window, text='Take a snapshot', width=50, font=['Times', '8', 'bold'])
-        # snapshot.pack(fill='both', padx=10, pady=5, anchor='n')
-        # snapshot.bind('<Button>', lambda x: self.take_snapshot())
-
         back = tk.Button(self.camera_window, text='Back', width=50, font=['Times', '10', 'bold'])
         back.pack(fill='both', padx=10, pady=5, anchor='n')
         back.bind('<Button>', lambda x: self.main_window(self.camera_window))
@@ -91,7 +87,7 @@ class gad_app(tk.Frame):
 
         self.image_window.pack(fill='both', expand=True)
 
-    def draw_found_faces(self, detected, image, color: tuple):
+    def draw_found_faces(self, detected, image, color: tuple, real=True):
         gen_encoder = {0: 'Female', 1: 'Male'}
         age_encoder = {0: '0-2', 1: '4-6', 2: '8-13', 3: '15-20', 4: '25-32', 5: '38-43', 6: '48-53', 7: '60+'}
         
@@ -101,12 +97,22 @@ class gad_app(tk.Frame):
             age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
             gender = gen_encoder[gender_pred]
             age = age_encoder[age_pred]
-            prediction = f'Gender: {gender} Age: {age}'
-
+            prediction_gender = f'Gender: {gender}'
+            prediction_age = f'Age: {age}'
             cv2.rectangle(image, (x, y), (x + width, y + height), color, thickness=3)
-            cv2.putText(image, prediction,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+            
+            if real == True:
 
+                text_scale = min(width, height) * 2e-3
+                text_thickness = int(np.ceil(min(width, height) * 1e-3))
+                cv2.putText(image, prediction_gender,  (x , y - 30), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                cv2.putText(image, prediction_age,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+            else:
 
+                text_scale = 1.5
+                text_thickness = 2
+                cv2.putText(image, prediction_gender,  (x , y - 75), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                cv2.putText(image, prediction_age,  (x , y - 25), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
 
     def start_camera(self):
         _, frame = self.vid.read()
@@ -121,27 +127,24 @@ class gad_app(tk.Frame):
         self.camera_frame.create_image(0, 0, image = self.photo, anchor = tk.NW)
         self.camera_frame.after(10, lambda: self.start_camera())
 
-    # def take_snapshot(self):
-    #     ts = datetime.datetime.now()
-    #     filename = "{}.jpg".format(ts.strftime("%Y-%m-%d_%H-%M-%S"))
-    #     p = os.path.sep.join((self.outputPath, filename))
-    #     cv2.imwrite(p, self.camera_frame.copy())
-
     def browse_img_file(self):
         filename = filedialog.askopenfilename(initialdir = "/", title = "Select an image", filetypes = (("JPG files", "*.JPG*"), ("all files", "*.*")))
         self.img = cv2.imdecode(np.fromfile(filename, np.uint8), cv2.IMREAD_UNCHANGED)
         grayscale_image = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
         detected_faces = self.face_cascade.detectMultiScale(image=grayscale_image, scaleFactor=1.3, minNeighbors=3)
-        self.draw_found_faces(detected_faces, self.img, (0, 255, 0))
+        self.draw_found_faces(detected_faces, self.img, (0, 255, 0), real=False)
         self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGBA)
-        self.img = PIL.Image.fromarray(self.img).resize((640, 480))
+        self.img = PIL.Image.fromarray(self.img).resize((720, 480))
         self.img = ImageTk.PhotoImage(image=self.img)
+        img_width = self.img.width()
+        img_height = self.img.height()
+        self.image_frame.config(width=img_width, height=img_height)
         self.image_frame.create_image(0, 0, image = self.img, anchor = tk.NW)
 
 if __name__ == '__main__':
 
     root = tk.Tk()
     app = gad_app(root)
-    root.geometry('640x640')
+    # root.geometry('640x640')
     root.title('Gender and Age Detecion Application')
     root.mainloop()
