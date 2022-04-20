@@ -33,6 +33,6 @@ Links:
 
 # Results
 
-![alt text]
+![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/leonard_result.png?token=GHSAT0AAAAAABTVQ55MGGEFMJRVZOGUPVLYYTAMNQQ)
 
 # Next steps
