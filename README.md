@@ -1,6 +1,6 @@
 # Gender and Age Detection with Tensorflows and OpenCV
 
-# Introduction:
+# Introduction
 
 In this project I would like to create a simple tkinter application, which will allow users to recognize gender and age. 
 Application has two options: 
@@ -13,12 +13,12 @@ Application has two options:
 We will use the deep learning methods to train a convolutiona neural network that will predict age groups and gender from an image containing the face of a person.
 
 
-# Dataset:
+# Dataset
 
 The dataset contains verious images in various real-world conditions with diffrent lighting and noise level. 
 It can be downloaded in zip format (links below). The directory contains the following files:
 
-Statistic:
+Statistic
 
 * Total number of photos: 26,580
 * Total number of subjects: 2,284
@@ -33,11 +33,11 @@ Links:
 
 # Results
 
-1. Real Tiem Result:
+1. Real Tiem Result
 
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/real_time_result.PNG)
 
-2. Load Images Results:
+2. Load Images Results
 
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/leonard_result.png)
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/penny_result.PNG)
