@@ -35,12 +35,12 @@ Links:
 
 1. Real Tiem Result:
 
-![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/application_result.PNG)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/real_time_result.PNG)
 
 2. Load Images Results:
 
-![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/leonard_result.png?raw=true)
-![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/penny_result.PNG?raw=true)
-![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/freinds.PNG?raw=true)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/leonard_result_result.PNG)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/penny_result.PNG)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/freinds_result.PNG)
 
 # Next steps
