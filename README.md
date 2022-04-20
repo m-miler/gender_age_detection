@@ -33,7 +33,7 @@ Links:
 
 # Results
 
-1. ![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/leonard_result.png?token=GHSAT0AAAAAABTVQ55MGGEFMJRVZOGUPVLYYTAMNQQ)
+1. ![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/leonard_result.png?token=GHSAT0AAAAAABTVQ55MJSFWWBQSWZ5UUT5MYTAMTTA)
 2. ![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/penny_result.PNG?token=GHSAT0AAAAAABTVQ55NRLQUKVINUA2WFD5WYTAMRVA)
 3. ![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/freinds.PNG?token=GHSAT0AAAAAABTVQ55MU3PH3KPBL6KEMB7YYTAMSWA)
 
