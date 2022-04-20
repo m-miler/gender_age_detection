@@ -35,7 +35,7 @@ Links:
 
 1. Real Tiem Result:
 
-![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/real_time_result.PNG?raw=true)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/application_result.PNG)
 
 2. Load Images Results:
 
