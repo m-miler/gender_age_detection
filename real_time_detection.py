@@ -171,7 +171,7 @@ class gad_app(tk.Frame):
         self.image_frame.create_image(0, 0, image = self.img, anchor = tk.NW)
 
 if __name__ == '__main__':
-    # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     root = tk.Tk()
     app = gad_app(root)
     root.title('Gender and Age Detecion Application')
