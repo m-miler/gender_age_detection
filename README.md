@@ -39,7 +39,7 @@ Links:
 
 2. Load Images Results:
 
-![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/leonard_result_result.png)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/leonard_result.png)
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/penny_result.PNG)
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/freinds.PNG)
 
