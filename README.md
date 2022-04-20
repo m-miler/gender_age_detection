@@ -42,6 +42,8 @@ Links:
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/leonard_result.png)
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/penny_result.PNG)
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/freinds.PNG)
+![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/baby_result.PNG)
+
 
 # Next steps
 
