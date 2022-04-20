@@ -1,13 +1,12 @@
 import tkinter as tk
 import cv2
 import PIL
-from PIL import Image, ImageTk, ImageOps
-from matplotlib import image
+from PIL import Image, ImageTk
 import datetime
 import os
 from tkinter import filedialog
 import numpy as np
-from pathlib import Path
+from pathlib import PurePosixPath
 from tensorflow.keras.models import  load_model
 
 class gad_app(tk.Frame):
@@ -22,8 +21,8 @@ class gad_app(tk.Frame):
         self.height = self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
-        self.gender_model = load_model('ml_model/gender_model')
-        self.age_model = load_model('ml_model/age_model')
+        self.gender_model = load_model('ml_model/gender_model.h5')
+        self.age_model = load_model('ml_model/age_model.h5')
 
         self.main_window()
 
@@ -43,7 +42,6 @@ class gad_app(tk.Frame):
         load_image_detection = tk.Button(self.main_window_frame, text='Image Detection', width=50,  height=10, font=['Times', '12', 'bold'])
         load_image_detection.pack(fill='both', padx=10, pady=20, anchor='n')
         load_image_detection.bind('<Button>', lambda x: self.image_main_window())
-
 
         self.main_window_frame.pack(fill='both', expand=True)
 
@@ -91,28 +89,59 @@ class gad_app(tk.Frame):
         gen_encoder = {0: 'Female', 1: 'Male'}
         age_encoder = {0: '0-2', 1: '4-6', 2: '8-13', 3: '15-20', 4: '25-32', 5: '38-43', 6: '48-53', 7: '60+'}
         
-        for (x, y, width, height) in detected:
-            img_to_pred = np.array(cv2.resize(image, (224, 224))).reshape(1, 224, 224, 3)
-            gender_pred = self.gender_model.predict(img_to_pred).argmax(1)[0]
-            age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
-            gender = gen_encoder[gender_pred]
-            age = age_encoder[age_pred]
-            prediction_gender = f'Gender: {gender}'
-            prediction_age = f'Age: {age}'
-            cv2.rectangle(image, (x, y), (x + width, y + height), color, thickness=3)
-            
-            if real == True:
+        if len(detected) > 1:
 
-                text_scale = min(width, height) * 2e-3
-                text_thickness = int(np.ceil(min(width, height) * 1e-3))
-                cv2.putText(image, prediction_gender,  (x , y - 30), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
-                cv2.putText(image, prediction_age,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
-            else:
+            for (x, y, width, height) in detected:
+                crop_img = image[y: y+height, x: x + width]
+                img_to_pred = np.array(cv2.resize(crop_img, (224, 224))).reshape(1, 224, 224, 3)
+                gender_pred = self.gender_model.predict(img_to_pred).argmax(1)[0]
+                age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
+                gender = gen_encoder[gender_pred]
+                age = age_encoder[age_pred]
+                prediction_gender = f'Gender: {gender}'
+                prediction_age = f'Age: {age}'
+                cv2.rectangle(image, (x, y), (x + width, y + height), color, thickness=3)
+                
+                if real == True:
 
-                text_scale = 1.5
-                text_thickness = 2
-                cv2.putText(image, prediction_gender,  (x , y - 75), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
-                cv2.putText(image, prediction_age,  (x , y - 25), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                    text_scale = min(width, height) * 2e-3
+                    text_thickness = int(np.ceil(min(width, height) * 1e-3))
+                    cv2.putText(image, prediction_gender,  (x , y - 30), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                    cv2.putText(image, prediction_age,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                
+                else:
+
+                    text_scale = 0.7
+                    text_thickness = 2
+                    cv2.putText(image, prediction_gender,  (x , y - 50), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                    cv2.putText(image, prediction_age,  (x , y - 25), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+
+        else:
+
+            for (x, y, width, height) in detected:
+                img_to_pred = np.array(cv2.resize(image, (224, 224))).reshape(1, 224, 224, 3)
+                gender_pred = self.gender_model.predict(img_to_pred).argmax(1)[0]
+                age_pred = self.age_model.predict(img_to_pred).argmax(1)[0]
+                gender = gen_encoder[gender_pred]
+                age = age_encoder[age_pred]
+                prediction_gender = f'Gender: {gender}'
+                prediction_age = f'Age: {age}'
+                cv2.rectangle(image, (x, y), (x + width, y + height), color, thickness=3)
+                
+                if real == True:
+
+                    text_scale = min(width, height) * 2e-3
+                    text_thickness = int(np.ceil(min(width, height) * 1e-3))
+                    cv2.putText(image, prediction_gender,  (x , y - 30), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                    cv2.putText(image, prediction_age,  (x , y - 10), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                
+                else:
+
+                    text_scale = 0.7
+                    text_thickness = 2
+                    cv2.putText(image, prediction_gender,  (x , y - 50), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+                    cv2.putText(image, prediction_age,  (x , y - 25), cv2.FONT_HERSHEY_SIMPLEX, text_scale , color, text_thickness)
+
 
     def start_camera(self):
         _, frame = self.vid.read()
@@ -128,12 +157,12 @@ class gad_app(tk.Frame):
         self.camera_frame.after(10, lambda: self.start_camera())
 
     def browse_img_file(self):
-        filename = filedialog.askopenfilename(initialdir = "/", title = "Select an image", filetypes = (("JPG files", "*.JPG*"), ("all files", "*.*")))
-        self.img = cv2.imdecode(np.fromfile(filename, np.uint8), cv2.IMREAD_UNCHANGED)
+        filename = filedialog.askopenfilename(initialdir = "/", title = "Select an image", filetypes = (("JPG files", "*.JPG*"), ("all files", "*.*")))        
+        filename = str(PurePosixPath(str(filename)))
+        self.img = np.array(Image.open(filename))
         grayscale_image = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
         detected_faces = self.face_cascade.detectMultiScale(image=grayscale_image, scaleFactor=1.3, minNeighbors=3)
         self.draw_found_faces(detected_faces, self.img, (0, 255, 0), real=False)
-        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGBA)
         self.img = PIL.Image.fromarray(self.img).resize((720, 480))
         self.img = ImageTk.PhotoImage(image=self.img)
         img_width = self.img.width()
@@ -142,9 +171,8 @@ class gad_app(tk.Frame):
         self.image_frame.create_image(0, 0, image = self.img, anchor = tk.NW)
 
 if __name__ == '__main__':
-
+    # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     root = tk.Tk()
     app = gad_app(root)
-    # root.geometry('640x640')
     root.title('Gender and Age Detecion Application')
     root.mainloop()
