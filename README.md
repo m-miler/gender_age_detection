@@ -44,3 +44,6 @@ Links:
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/freinds.PNG)
 
 # Next steps
+
+1. Improve age model accuaracy(find more examples and use data augmentation) 
+2. Reduce overfiting in both models
