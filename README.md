@@ -34,7 +34,7 @@ Links:
 # Results
 
 ![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/leonard_result.png?token=GHSAT0AAAAAABTVQ55MGGEFMJRVZOGUPVLYYTAMNQQ)
-![alt text]
+![alt text](https://raw.githubusercontent.com/m-miler/gender_age_detection/master/results/penny_result.PNG?token=GHSAT0AAAAAABTVQ55NRLQUKVINUA2WFD5WYTAMRVA)
 ![alt text]
 
 # Next steps
