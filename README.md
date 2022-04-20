@@ -5,7 +5,7 @@
 In this project I would like to create a simple tkinter application, which will allow users to recognize gender and age. 
 Application has two options: 
 
-1. Use a web camera to regognize face and predict gender and age in real time 
+1. Use a web camera to recognize face and predict gender and age in real time 
 2. Load a sample image from a directory than predict gender and age 
 
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/application_result.PNG)
