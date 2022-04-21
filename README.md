@@ -31,7 +31,6 @@ Statistic
 
 Links:
 1. https://www.kaggle.com/datasets/ttungl/adience-benchmark-gender-and-age-classification
-2. https://talhassner.github.io/home/projects/Adience/Adience-data.html
 
 # Download 
 
