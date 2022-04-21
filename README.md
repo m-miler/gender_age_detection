@@ -54,7 +54,10 @@ https://drive.google.com/drive/folders/1cEd4jA8q0cdH94f-aVtz9BbTrGbaBlYk?usp=sha
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/old_result.PNG)
 
 
-# Next steps
+# Further possible developments
 
-1. Improve age model accuaracy(find more examples and use data augmentation) 
-2. Reduce overfiting in both models
+Due to the limitations of preparation time and the computational limitations of the computer (long learning time), I was not able to obtain ideal values for the models, (especially for the age model). The following steps can be taken to improve the quality of the models:
+
+1. Find more examples
+2. Use data augmentation
+3. Better hyperparameters optimatization
