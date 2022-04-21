@@ -55,7 +55,7 @@ https://drive.google.com/drive/folders/1cEd4jA8q0cdH94f-aVtz9BbTrGbaBlYk?usp=sha
 
 # Further possible developments
 
-Due to the limitations of preparation time and the computational limitations of the computer (long learning time), I was not able to obtain ideal values for the models, (especially for the age model). The following steps can be taken to improve the quality of the models:
+Due to time constraints in preparing the project and calculation limitations of the computer (long learning time), I was not able to obtain ideal values for the models (especially for the age model). The following steps can be taken to improve the quality of the models:
 
 1. Find more examples
 2. Use data augmentation
