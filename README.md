@@ -32,15 +32,10 @@ Statistic
 Links:
 1. https://www.kaggle.com/datasets/ttungl/adience-benchmark-gender-and-age-classification
 
-# Download 
-
-The entire project can be downloaded from the link below.
-
-https://drive.google.com/drive/folders/1cEd4jA8q0cdH94f-aVtz9BbTrGbaBlYk?usp=sharing
 
 # Results
 
-1. Real Tiem Result
+1. Real Time Result
 
 ![alt text](https://github.com/m-miler/gender_age_detection/blob/master/results/real_time_result.PNG)
 
